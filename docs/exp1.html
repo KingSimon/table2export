@@ -1,0 +1,99 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>表格导出</title>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.0.0/dist/css/bootstrap.css"/>
+    <script type="text/javascript" src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
+    <script type="text/javascript" src="../src/jquery.table2export.js"></script>
+    <style>
+        .hide {
+            display: none;
+        }
+
+        table td, table th {
+            text-align: center;
+            color: darkgreen;
+        }
+
+        td[rowspan] {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table id="table1" class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>列1</th>
+                    <th>列2</th>
+                    <th>列3</th>
+                    <th>列4</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>内容1</td>
+                    <td>内容1</td>
+                    <td>内容3</td>
+                    <td>内容4</td>
+                </tr>
+                <tr>
+                    <td>内容1</td>
+                    <td>内容1</td>
+                    <td>内容3</td>
+                    <td>内容4</td>
+                </tr>
+                <tr>
+                    <td>内容2</td>
+                    <td>内容1</td>
+                    <td>内容3</td>
+                    <td>内容4</td>
+                </tr>
+                <tr>
+                    <td>内容2</td>
+                    <td>内容2</td>
+                    <td>内容3</td>
+                    <td>内容4</td>
+                </tr>
+                <tr>
+                    <td>内容3</td>
+                    <td>内容2</td>
+                    <td>内容3</td>
+                    <td class="no-export">内容4</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12">
+            <select id="sExportType">
+                <option value="xls">xls</option>
+                <option value="doc">doc</option>
+                <option value="csv">csv</option>
+                <option value="json">json</option>
+                <option value="txt">txt</option>
+            </select>
+            <button id="btnExport" class="btn btn-success">导出文档</button>
+        </div>
+    </div>
+
+</div>
+<script>
+    $(function () {
+        $('#btnExport').on('click', function () {
+            var ExportType = $('#sExportType').val() || 'xls';
+            $('#table1').table2export({
+                exclude: '.no-export',                                  //排除导出项
+                style: ['color', 'backgroundColor', 'fontWeight'],   //导出xls或doc支持样式
+                name: 'Excel Document Name',                            //
+                filename: 'myFileName',                                 //导出文件名
+                type: ExportType                                          //导出文件格式
+            });
+        });
+
+    });
+</script>
+</body>
+</html>
